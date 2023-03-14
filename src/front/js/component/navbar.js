@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+
 	const handleLogout = () => {
-		if(localStorage.getItem("token")){
-			localStorage.removeItem("token")
+		if(sessionStorage.getItem("token")){
+			sessionStorage.removeItem("token")
 		}
 	}
 
- 	return (
+	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
 				<Link to="/">

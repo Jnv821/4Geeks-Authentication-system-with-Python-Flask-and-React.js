@@ -7,13 +7,13 @@ const [userInformation, setUserInformation] = useState({})
 const navigate = useNavigate()
 
 useEffect(() => {
-    if(!localStorage.getItem("token")){
+    if(!sessionStorage.getItem("token")){
         navigate("/login")
     }
 
     fetch(process.env.BACKEND_URL + "/api/user", {
         headers: {
-            "Authorization" : "Bearer " + localStorage.getItem("token")
+            "Authorization" : "Bearer " + sessionStorage.getItem("token")
         }
     })
     .then(res => res.json())

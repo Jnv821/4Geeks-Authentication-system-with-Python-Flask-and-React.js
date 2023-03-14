@@ -30,7 +30,7 @@ const handleLogin = (ev) => {
     })
     .then(res => res.json())
     .then(data => {
-        localStorage.setItem("token", data.token)
+        sessionStorage.setItem("token", data.token)
         navigate("/private")
     })
     .catch(err => console.log(err))
