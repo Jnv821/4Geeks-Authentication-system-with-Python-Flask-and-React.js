@@ -16,3 +16,29 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/register', methods=['POST'])
+def register():
+    
+    data = request.json
+
+    if not data["email"]:
+        return jsonify({"msg": "No email provided"}), 401
+
+    if not data["password"]:
+        return jsonify({"msg": "No password provided"}), 401
+    
+    user = User(email=data["email"], password=data["password"], is_active=True)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify({"msg": "Successfully created a new user"})
+
+@api.route('/users', methods=['GET'])
+def show_users():
+    users = User.query.all()
+
+    user_list = [user.serialize() for user in users]
+
+    return jsonify(user_list)
